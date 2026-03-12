@@ -6,6 +6,6 @@ from proveedores.models import Proveedores
 def listar_proveedores(request):
     proveedores_q = Proveedores.objects.all()
     context = {
-        "listar_proveedores": proveedores_q
+        "proveedores": proveedores_q
     }
     return render(request, "proveedores/lista_proveedores.html", context)

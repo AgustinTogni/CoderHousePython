@@ -6,6 +6,6 @@ from clientes.models import Clientes
 def listar_clientes(request):
     clientes_q = Clientes.objects.all()
     context = {
-        "listar_clientes": clientes_q
+        "clientes": clientes_q
     }
     return render(request, "clientes/lista_clientes.html", context)
