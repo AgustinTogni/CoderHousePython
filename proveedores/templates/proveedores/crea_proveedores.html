@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Nuevo Proveedor | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold">Agregar Proveedor</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Número de proveedor
+                    <span class="text-muted">(ingresa: {{ numero_actual }})</span>
+                </label>
+                {{ form.numero_proveedor }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Negocio</label>
+                {{ form.negocio }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                {{ form.nombre }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                {{ form.apellido }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                {{ form.numero_telefonico }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-dark">
+                    Guardar proveedor
+                </button>
+
+                <a href="{% url 'proveedores:listar_proveedores' %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

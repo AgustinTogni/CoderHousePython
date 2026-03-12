@@ -6,7 +6,34 @@ Productos | Distribuidora GABT
 
 {% block contenido %}
 
-<h2 class="mb-4 fw-bold">Listado de Productos</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
+
+    <h2 class="fw-bold mb-0 text-center text-md-start">
+        Listado de Productos
+    </h2>
+
+    <a href="{% url 'productos:crear_productos' %}" class="btn btn-dark">
+        + Nuevo producto
+    </a>
+
+</div>
+
+<!-- BUSCADOR -->
+<div class="d-flex justify-content-md-end mb-4">
+    <form method="get" action="{% url 'productos:buscar_productos' %}" class="w-100 w-md-auto"
+        style="max-width: 360px;">
+        <div class="input-group">
+
+            <input type="text" name="producto" class="form-control" placeholder="Buscar producto..."
+                value="{{ productos_q }}">
+
+            <button class="btn btn-dark" type="submit">
+                Buscar
+            </button>
+
+        </div>
+    </form>
+</div>
 
 {% if productos %}
 
@@ -17,6 +44,7 @@ Productos | Distribuidora GABT
             <tr>
                 <th>Producto</th>
                 <th>Precio</th>
+                <th>Stock</th>
             </tr>
         </thead>
 
@@ -26,6 +54,9 @@ Productos | Distribuidora GABT
                 <td>{{ producto.nombre }}</td>
                 <td class="fw-semibold text-dark">
                     ${{ producto.precio }}
+                </td>
+                <td>
+                    {{ producto.stock }}
                 </td>
             </tr>
             {% endfor %}
@@ -37,7 +68,19 @@ Productos | Distribuidora GABT
 {% else %}
 
 <div class="alert alert-secondary text-center shadow-sm">
+
+    {% if productos_q %}
+    <p class="mb-2">
+        No se encontraron productos para "<strong>{{ productos_q }}</strong>".
+    </p>
+
+    <a href="{% url 'productos:listar_productos' %}" class="btn btn-sm btn-dark">
+        Ver todos los productos
+    </a>
+    {% else %}
     No hay productos disponibles.
+    {% endif %}
+
 </div>
 
 {% endif %}

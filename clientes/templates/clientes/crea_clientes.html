@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Nuevo Cliente | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold">Agregar Cliente</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Número de negocio
+                    <span class="text-muted">(ingresar: {{ numero_actual }})</span>
+                </label>
+                {{ form.numero_negocio }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Negocio</label>
+                {{ form.negocio }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                {{ form.nombre }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                {{ form.apellido }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">DNI</label>
+                {{ form.dni }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                {{ form.numero_telefonico }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-dark">
+                    Guardar cliente
+                </button>
+
+                <a href="{% url 'clientes:listar_clientes' %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
