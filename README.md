@@ -10,10 +10,15 @@ Sigue estos pasos para ejecutar el proyecto en tu entorno local.
 
 ```bash
 git clone https://github.com/AgustinTogni/CoderHousePython.git
+```
+
+## 2. Navegar al directorio del proyecto
+
+```bash
 cd CoderHousePython
 ```
 
-## 2. Crear un entorno virtual
+## 3. Crear un entorno virtual
 
 Se recomienda utilizar un entorno virtual para aislar las dependencias del proyecto.
 
@@ -21,13 +26,13 @@ Se recomienda utilizar un entorno virtual para aislar las dependencias del proye
 python -m venv venv
 ```
 
-## 3. Activar el entorno virtual
+## 4. Activar el entorno virtual
 
 ```bash
 venv\Scripts\activate
 ```
 
-## 4. Instalar las dependencias
+## 5. Instalar las dependencias
 
 Instalar todas las librerías necesarias definidas en el archivo `requirements.txt`.
 
@@ -35,7 +40,7 @@ Instalar todas las librerías necesarias definidas en el archivo `requirements.t
 pip install -r requirements.txt
 ```
 
-## 5. Aplicar migraciones
+## 6. Aplicar migraciones
 
 Este paso crea las tablas necesarias en la base de datos.
 
@@ -43,7 +48,7 @@ Este paso crea las tablas necesarias en la base de datos.
 python manage.py migrate
 ```
 
-## 6. Ejecutar el servidor
+## 7. Ejecutar el servidor
 
 Iniciar el servidor de desarrollo de Django.
 
