@@ -20,7 +20,7 @@ Proveedores | Distribuidora GABT
 
 <!-- BUSCADOR -->
 <div class="d-flex justify-content-md-end mb-4">
-    <form method="get" action="{% url 'proveedores:buscar_proveedores' %}" class="w-100 w-md-auto"
+    <form method="get" action="{% url 'proveedores:listar_proveedores' %}" class="w-100 w-md-auto"
         style="max-width: 360px;">
         <div class="input-group">
 
@@ -47,6 +47,7 @@ Proveedores | Distribuidora GABT
                 <th>Apellido</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -58,6 +59,12 @@ Proveedores | Distribuidora GABT
                 <td>{{ proveedor.apellido }}</td>
                 <td>{{ proveedor.numero_telefonico }}</td>
                 <td>{{ proveedor.email }}</td>
+                <td>
+                    <a href="{% url 'proveedores:actualizar_proveedores' proveedor.numero_proveedor %}" 
+                        class="btn btn-sm btn-outline-dark">
+                        Actualizar
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

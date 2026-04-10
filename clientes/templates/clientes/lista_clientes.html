@@ -20,7 +20,7 @@ Clientes | Distribuidora GABT
 
 <!-- BUSCADOR -->
 <div class="d-flex justify-content-md-end mb-4">
-    <form method="get" action="{% url 'clientes:buscar_clientes' %}" class="w-100 w-md-auto" style="max-width: 360px;">
+    <form method="get" action="{% url 'clientes:listar_clientes' %}" class="w-100 w-md-auto" style="max-width: 360px;">
         <div class="input-group">
 
             <input type="text" name="negocio" class="form-control" placeholder="Buscar cliente..."
@@ -47,6 +47,7 @@ Clientes | Distribuidora GABT
                 <th>DNI</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -59,6 +60,12 @@ Clientes | Distribuidora GABT
                 <td>{{ cliente.dni }}</td>
                 <td>{{ cliente.numero_telefonico }}</td>
                 <td>{{ cliente.email }}</td>
+                <td>
+                    <a href="{% url 'clientes:actualizar_clientes' cliente.dni %}" 
+                        class="btn btn-sm btn-outline-dark">
+                        Actualizar
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

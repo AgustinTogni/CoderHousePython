@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Editar Proveedor | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">Editar Proveedor</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Campos editables -->
+            <div class="mb-3">
+                <label class="form-label">Negocio</label>
+                {{ form.negocio }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                {{ form.nombre }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                {{ form.apellido }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                {{ form.numero_telefonico }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="d-flex gap-2 justify-content-center justify-content-md-start">
+                <button type="submit" class="btn btn-dark">
+                    Guardar cambios
+                </button>
+
+                <a href="{% url 'proveedores:listar_proveedores' %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

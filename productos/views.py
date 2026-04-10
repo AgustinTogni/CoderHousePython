@@ -5,17 +5,21 @@ from productos.forms import ProductosForm
 # Create your views here.
 
 def listar_productos(request):
+    productos_q = request.GET.get("producto", "")
 
-    productos_q = Productos.objects.all()
+    if productos_q:
+        productos = Productos.objects.filter(nombre__icontains=productos_q)
+    else:
+        productos = Productos.objects.all()
 
     context = {
-        "productos": productos_q
+        "productos": productos,
+        "productos_q": productos_q
     }
 
     return render(request, "productos/lista_productos.html", context)
 
 def crear_productos(request):
-
     numero_actual = Productos.objects.count() + 1
 
     if request.method == "POST":
@@ -31,18 +35,4 @@ def crear_productos(request):
     return render(request, "productos/crea_productos.html", {
         "form": form,
         "numero_actual": numero_actual
-    })
-
-def buscar_productos(request):
-
-    productos_q = request.GET.get("producto", "")
-
-    if productos_q:
-        productos = Productos.objects.filter(nombre__icontains=productos_q)
-    else:
-        productos = Productos.objects.all()
-
-    return render(request, "productos/lista_productos.html", {
-        "productos": productos,
-        "productos_q": productos_q
     })
