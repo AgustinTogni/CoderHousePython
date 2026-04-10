@@ -61,9 +61,9 @@ Clientes | Distribuidora GABT
                 <td>{{ cliente.numero_telefonico }}</td>
                 <td>{{ cliente.email }}</td>
                 <td>
-                    <a href="{% url 'clientes:actualizar_clientes' cliente.dni %}" 
-                        class="btn btn-sm btn-outline-dark">
-                        Actualizar
+                    <a href="{% url 'clientes:visualizar_clientes' cliente.dni %}"
+                        class="btn btn-sm btn-outline-primary">
+                        Ver
                     </a>
                 </td>
             </tr>

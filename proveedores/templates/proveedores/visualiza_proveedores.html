@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Detalle Proveedor | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">Detalle del Proveedor</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Número de proveedor</small>
+                    <div class="fw-semibold fs-5">{{ proveedor.numero_proveedor }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Negocio</small>
+                    <div class="fw-semibold fs-5">{{ proveedor.negocio }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Nombre</small>
+                    <div class="fw-semibold fs-5">{{ proveedor.nombre }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Apellido</small>
+                    <div class="fw-semibold fs-5">{{ proveedor.apellido }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Teléfono</small>
+                    <div class="fw-semibold fs-5">{{ proveedor.numero_telefonico }}</div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Email</small>
+                    <div class="fw-semibold fs-5">{{ proveedor.email }}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
+
+            <a href="{% url 'proveedores:listar_proveedores' %}" class="btn btn-secondary">
+                Volver
+            </a>
+
+            <a href="{% url 'proveedores:actualizar_proveedores' proveedor.numero_proveedor %}" class="btn btn-dark">
+                Actualizar
+            </a>
+
+            <a href="{% url 'proveedores:eliminar_proveedores' proveedor.numero_proveedor %}" class="btn btn-danger">
+                Eliminar
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

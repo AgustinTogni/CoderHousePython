@@ -60,9 +60,9 @@ Proveedores | Distribuidora GABT
                 <td>{{ proveedor.numero_telefonico }}</td>
                 <td>{{ proveedor.email }}</td>
                 <td>
-                    <a href="{% url 'proveedores:actualizar_proveedores' proveedor.numero_proveedor %}" 
-                        class="btn btn-sm btn-outline-dark">
-                        Actualizar
+                    <a href="{% url 'proveedores:visualizar_proveedores' proveedor.numero_proveedor %}"
+                        class="btn btn-sm btn-outline-primary">
+                        Ver
                     </a>
                 </td>
             </tr>

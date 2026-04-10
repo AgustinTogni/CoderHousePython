@@ -19,6 +19,13 @@ def listar_clientes(request):
 
     return render(request, "clientes/lista_clientes.html", context)
 
+def visualizar_clientes(request, dni):
+    cliente = get_object_or_404(Clientes, dni=dni)
+
+    return render(request, "clientes/visualiza_clientes.html", {
+        "cliente": cliente
+    })
+
 def crear_clientes(request):
     numero_actual = Clientes.objects.count() + 1
 
@@ -50,4 +57,15 @@ def actualizar_clientes(request, dni):
 
     return render(request, "clientes/actualiza_clientes.html", {
         "form": form
+    })
+
+def eliminar_clientes(request, dni):
+    cliente = get_object_or_404(Clientes, dni=dni)
+
+    if request.method == "POST":
+        cliente.delete()
+        return redirect("clientes:listar_clientes")
+
+    return render(request, "clientes/elimina_clientes.html", {
+        "cliente": cliente
     })

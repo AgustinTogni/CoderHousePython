@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Eliminar Cliente | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start text-danger">
+    Eliminar Cliente
+</h2>
+
+<div class="card shadow-sm border-danger">
+    <div class="card-body">
+
+        <div class="alert alert-danger text-center">
+            <p class="mb-2 fw-semibold">
+                ¿Estás seguro que querés eliminar este cliente?
+            </p>
+            <p class="mb-0">
+                <strong>{{ cliente.nombre }} {{ cliente.apellido }}</strong>
+            </p>
+        </div>
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light">
+                    <small class="text-muted">DNI</small>
+                    <div class="fw-semibold">{{ cliente.dni }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light">
+                    <small class="text-muted">Negocio</small>
+                    <div class="fw-semibold">{{ cliente.negocio }}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <form method="post" class="d-flex justify-content-center justify-content-md-start gap-2">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-danger">
+                Sí, eliminar
+            </button>
+
+            <a href="{% url 'clientes:visualizar_clientes' cliente.dni %}" class="btn btn-secondary">
+                Cancelar
+            </a>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

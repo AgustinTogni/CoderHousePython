@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Detalle Cliente | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">Detalle del Cliente</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Número de negocio</small>
+                    <div class="fw-semibold fs-5">{{ cliente.numero_negocio }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">DNI</small>
+                    <div class="fw-semibold fs-5">{{ cliente.dni }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Negocio</small>
+                    <div class="fw-semibold fs-5">{{ cliente.negocio }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Teléfono</small>
+                    <div class="fw-semibold fs-5">{{ cliente.numero_telefonico }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Nombre</small>
+                    <div class="fw-semibold fs-5">{{ cliente.nombre }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Apellido</small>
+                    <div class="fw-semibold fs-5">{{ cliente.apellido }}</div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Email</small>
+                    <div class="fw-semibold fs-5">{{ cliente.email }}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
+
+            <a href="{% url 'clientes:listar_clientes' %}" class="btn btn-secondary">
+                Volver
+            </a>
+
+            <a href="{% url 'clientes:actualizar_clientes' cliente.dni %}" class="btn btn-dark">
+                Actualizar
+            </a>
+
+            <a href="{% url 'clientes:eliminar_clientes' cliente.dni %}" class="btn btn-danger">
+                Eliminar
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

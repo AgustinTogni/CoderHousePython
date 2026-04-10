@@ -19,6 +19,13 @@ def listar_proveedores(request):
 
     return render(request, "proveedores/lista_proveedores.html", context)
 
+def visualizar_proveedores(request, numero_proveedor):
+    proveedor = get_object_or_404(Proveedores, numero_proveedor=numero_proveedor)
+
+    return render(request, "proveedores/visualiza_proveedores.html", {
+        "proveedor": proveedor
+    })
+
 def crear_proveedores(request):
     numero_actual = Proveedores.objects.count() + 1
 
@@ -50,4 +57,15 @@ def actualizar_proveedores(request, numero_proveedor):
 
     return render(request, "proveedores/actualiza_proveedores.html", {
         "form": form
+    })
+
+def eliminar_proveedores(request, numero_proveedor):
+    proveedor = get_object_or_404(Proveedores, numero_proveedor=numero_proveedor)
+
+    if request.method == "POST":
+        proveedor.delete()
+        return redirect("proveedores:listar_proveedores")
+
+    return render(request, "proveedores/elimina_proveedores.html", {
+        "proveedor": proveedor
     })
