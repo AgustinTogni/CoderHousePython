@@ -56,7 +56,8 @@ def actualizar_proveedores(request, numero_proveedor):
         form = ProveedoresUpdateForm(instance=proveedor)
 
     return render(request, "proveedores/actualiza_proveedores.html", {
-        "form": form
+        "form": form,
+        "proveedor": proveedor
     })
 
 def eliminar_proveedores(request, numero_proveedor):

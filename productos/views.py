@@ -1,38 +1,61 @@
-from django.shortcuts import render, redirect
+from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
+from django.urls import reverse_lazy
 from productos.models import Productos
-from productos.forms import ProductosForm
+from productos.forms import *
 
 # Create your views here.
 
-def listar_productos(request):
-    productos_q = request.GET.get("producto", "")
+class ProductosListView(ListView):
+    model = Productos
+    template_name = "productos/lista_productos.html"
+    context_object_name = "productos"
 
-    if productos_q:
-        productos = Productos.objects.filter(nombre__icontains=productos_q)
-    else:
-        productos = Productos.objects.all()
+    def get_queryset(self):
+        productos_q = self.request.GET.get("producto", "")
 
-    context = {
-        "productos": productos,
-        "productos_q": productos_q
-    }
+        if productos_q:
+            return Productos.objects.filter(nombre__icontains=productos_q)
+        return Productos.objects.all()
 
-    return render(request, "productos/lista_productos.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["productos_q"] = self.request.GET.get("producto", "")
+        return context
 
-def crear_productos(request):
-    numero_actual = Productos.objects.count() + 1
+class ProductosDetailView(DetailView):
+    model = Productos
+    template_name = "productos/visualiza_productos.html"
+    context_object_name = "producto"
 
-    if request.method == "POST":
-        form = ProductosForm(request.POST)
+    slug_field = "numero_producto"
+    slug_url_kwarg = "numero_producto"
 
-        if form.is_valid():
-            form.save()
-            return redirect("productos:listar_productos")
+class ProductosCreateView(CreateView):
+    model = Productos
+    form_class = ProductosForm
+    template_name = "productos/crea_productos.html"
+    success_url = reverse_lazy("productos:listar_productos")
 
-    else:
-        form = ProductosForm()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["numero_actual"] = Productos.objects.count() + 1
+        return context
 
-    return render(request, "productos/crea_productos.html", {
-        "form": form,
-        "numero_actual": numero_actual
-    })
+class ProductosUpdateView(UpdateView):
+    model = Productos
+    form_class = ProductosUpdateForm
+    template_name = "productos/actualiza_productos.html"
+    context_object_name = "producto"
+    success_url = reverse_lazy("productos:listar_productos")
+
+    slug_field = "numero_producto"
+    slug_url_kwarg = "numero_producto"
+
+class ProductosDeleteView(DeleteView):
+    model = Productos
+    template_name = "productos/elimina_productos.html"
+    context_object_name = "producto"
+    success_url = reverse_lazy("productos:listar_productos")
+
+    slug_field = "numero_producto"
+    slug_url_kwarg = "numero_producto"

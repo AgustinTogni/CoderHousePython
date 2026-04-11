@@ -56,7 +56,8 @@ def actualizar_clientes(request, dni):
         form = ClienteUpdateForm(instance=cliente)
 
     return render(request, "clientes/actualiza_clientes.html", {
-        "form": form
+        "form": form,
+        "cliente": cliente
     })
 
 def eliminar_clientes(request, dni):

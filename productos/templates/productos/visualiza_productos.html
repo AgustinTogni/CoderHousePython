@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Detalle Producto | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">Detalle del Producto</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Producto</small>
+                    <div class="fw-semibold fs-5">{{ producto.nombre }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Precio</small>
+                    <div class="fw-semibold fs-5">
+                        ${{ producto.precio }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Stock</small>
+                    <div class="fw-semibold fs-5">{{ producto.stock }}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
+
+            <a href="{% url 'productos:listar_productos' %}" class="btn btn-secondary">
+                Volver
+            </a>
+
+            <a href="{% url 'productos:actualizar_productos' producto.numero_producto %}" class="btn btn-dark">
+                Actualizar
+            </a>
+
+            <a href="{% url 'productos:eliminar_productos' producto.numero_producto %}" class="btn btn-danger">
+                Eliminar
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

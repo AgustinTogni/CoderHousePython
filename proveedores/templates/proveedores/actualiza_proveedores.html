@@ -45,7 +45,8 @@ Editar Proveedor | Distribuidora GABT
                     Guardar cambios
                 </button>
 
-                <a href="{% url 'proveedores:listar_proveedores' %}" class="btn btn-secondary">
+                <a href="{% url 'proveedores:visualizar_proveedores' proveedor.numero_proveedor %}"
+                    class="btn btn-secondary">
                     Cancelar
                 </a>
             </div>

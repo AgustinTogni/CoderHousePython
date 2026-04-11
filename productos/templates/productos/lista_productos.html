@@ -45,6 +45,7 @@ Productos | Distribuidora GABT
                 <th>Producto</th>
                 <th>Precio</th>
                 <th>Stock</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -57,6 +58,12 @@ Productos | Distribuidora GABT
                 </td>
                 <td>
                     {{ producto.stock }}
+                </td>
+                <td>
+                    <a href="{% url 'productos:visualizar_producto' producto.numero_producto %}"
+                        class="btn btn-sm btn-outline-primary">
+                        Ver
+                    </a>
                 </td>
             </tr>
             {% endfor %}
