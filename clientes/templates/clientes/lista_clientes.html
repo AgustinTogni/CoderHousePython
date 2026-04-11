@@ -51,7 +51,7 @@ Clientes | Distribuidora GABT
                 <th>DNI</th>
                 <th>Teléfono</th>
                 <th>Email</th>
-                <th>Acciones</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
 
@@ -64,7 +64,7 @@ Clientes | Distribuidora GABT
                 <td>{{ cliente.dni }}</td>
                 <td>{{ cliente.numero_telefonico }}</td>
                 <td>{{ cliente.email }}</td>
-                <td>
+                <td class="text-center align-middle">
                     <a href="{% url 'clientes:visualizar_clientes' cliente.dni %}"
                         class="btn btn-sm btn-outline-primary">
                         Ver

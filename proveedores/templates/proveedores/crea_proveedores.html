@@ -14,31 +14,78 @@ Nuevo Proveedor | Distribuidora GABT
         <form method="post">
             {% csrf_token %}
 
+            <!-- NEGOCIO -->
             <div class="mb-3">
                 <label class="form-label">Negocio</label>
-                {{ form.negocio }}
+
+                <input type="text" name="{{ form.negocio.name }}" value="{{ form.negocio.value|default_if_none:'' }}"
+                    class="form-control {% if form.negocio.errors %}is-invalid{% endif %}">
+
+                {% if form.negocio.errors %}
+                <div class="invalid-feedback">
+                    {{ form.negocio.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- NOMBRE -->
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
-                {{ form.nombre }}
+
+                <input type="text" name="{{ form.nombre.name }}" value="{{ form.nombre.value|default_if_none:'' }}"
+                    class="form-control {% if form.nombre.errors %}is-invalid{% endif %}">
+
+                {% if form.nombre.errors %}
+                <div class="invalid-feedback">
+                    {{ form.nombre.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- APELLIDO -->
             <div class="mb-3">
                 <label class="form-label">Apellido</label>
-                {{ form.apellido }}
+
+                <input type="text" name="{{ form.apellido.name }}" value="{{ form.apellido.value|default_if_none:'' }}"
+                    class="form-control {% if form.apellido.errors %}is-invalid{% endif %}">
+
+                {% if form.apellido.errors %}
+                <div class="invalid-feedback">
+                    {{ form.apellido.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- TELEFONO -->
             <div class="mb-3">
                 <label class="form-label">Teléfono</label>
-                {{ form.numero_telefonico }}
+
+                <input type="text" name="{{ form.numero_telefonico.name }}"
+                    value="{{ form.numero_telefonico.value|default_if_none:'' }}"
+                    class="form-control {% if form.numero_telefonico.errors %}is-invalid{% endif %}">
+
+                {% if form.numero_telefonico.errors %}
+                <div class="invalid-feedback">
+                    {{ form.numero_telefonico.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- EMAIL -->
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                {{ form.email }}
+
+                <input type="email" name="{{ form.email.name }}" value="{{ form.email.value|default_if_none:'' }}"
+                    class="form-control {% if form.email.errors %}is-invalid{% endif %}">
+
+                {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {{ form.email.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- BOTONES -->
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-dark">
                     Guardar proveedor

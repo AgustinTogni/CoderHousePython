@@ -53,7 +53,7 @@ Proveedores | Distribuidora GABT
                 <th>Apellido</th>
                 <th>Teléfono</th>
                 <th>Email</th>
-                <th>Acciones</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
 
@@ -65,7 +65,7 @@ Proveedores | Distribuidora GABT
                 <td>{{ proveedor.apellido }}</td>
                 <td>{{ proveedor.numero_telefonico }}</td>
                 <td>{{ proveedor.email }}</td>
-                <td>
+                <td class="text-center align-middle">
                     <a href="{% url 'proveedores:visualizar_proveedores' proveedor.numero_proveedor %}"
                         class="btn btn-sm btn-outline-primary">
                         Ver
