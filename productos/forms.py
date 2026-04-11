@@ -12,8 +12,25 @@ class ProductosForm(forms.ModelForm):
 
         widgets = {
             "nombre": forms.TextInput(attrs={"class": "form-control"}),
-            "precio": forms.NumberInput(attrs={"class": "form-control", "step": "0.01"}),
+            "precio": forms.NumberInput(attrs={"class": "form-control"}),
             "stock": forms.NumberInput(attrs={"class": "form-control"})
+        }
+
+        error_messages = {
+            "nombre": {
+                "required": "El nombre del producto es obligatorio.",
+                "max_length": "El nombre del producto no puede superar los 100 caracteres.",
+            },
+            "precio": {
+                "required": "El precio es obligatorio.",
+                "max_digits": "El precio excede la cantidad de dígitos permitidos.",
+                "max_decimal_places": "El precio tiene demasiados decimales.",
+            },
+            "stock": {
+                "required": "El stock es obligatorio.",
+                "invalid": "Ingresá un número válido para el stock.",
+                "min_value": "El stock no puede ser negativo.",
+            }
         }
 
 class ProductosUpdateForm(forms.ModelForm):
@@ -27,6 +44,23 @@ class ProductosUpdateForm(forms.ModelForm):
 
         widgets = {
             "nombre": forms.TextInput(attrs={"class": "form-control"}),
-            "precio": forms.NumberInput(attrs={"class": "form-control", "step": "0.01"}),
+            "precio": forms.NumberInput(attrs={"class": "form-control"}),
             "stock": forms.NumberInput(attrs={"class": "form-control"})
+        }
+
+        error_messages = {
+            "nombre": {
+                "required": "El nombre del producto es obligatorio.",
+                "max_length": "El nombre no puede superar los 100 caracteres.",
+            },
+            "precio": {
+                "required": "El precio es obligatorio.",
+                "max_digits": "El precio excede la cantidad de dígitos permitidos.",
+                "max_decimal_places": "El precio tiene demasiados decimales.",
+            },
+            "stock": {
+                "required": "El stock es obligatorio.",
+                "invalid": "Ingresá un número válido para el stock.",
+                "min_value": "El stock no puede ser negativo.",
+            }
         }

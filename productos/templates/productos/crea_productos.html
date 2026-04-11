@@ -13,24 +13,53 @@ Nuevo Producto | Distribuidora GABT
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <form method="post">
+        <form method="post" novalidate>
             {% csrf_token %}
 
+            <!-- NOMBRE -->
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
-                {{ form.nombre }}
+
+                <input type="text" name="{{ form.nombre.name }}" value="{{ form.nombre.value|default_if_none:'' }}"
+                    class="form-control {% if form.nombre.errors %}is-invalid{% endif %}">
+
+                {% if form.nombre.errors %}
+                <div class="invalid-feedback">
+                    {{ form.nombre.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- PRECIO -->
             <div class="mb-3">
                 <label class="form-label">Precio</label>
-                {{ form.precio }}
+
+                <input type="number" step="0.01" name="{{ form.precio.name }}"
+                    value="{{ form.precio.value|default_if_none:'' }}"
+                    class="form-control {% if form.precio.errors %}is-invalid{% endif %}">
+
+                {% if form.precio.errors %}
+                <div class="invalid-feedback">
+                    {{ form.precio.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- STOCK -->
             <div class="mb-3">
                 <label class="form-label">Stock</label>
-                {{ form.stock }}
+
+                <input type="number" name="{{ form.stock.name }}" value="{{ form.stock.value|default_if_none:'' }}"
+                    class="form-control {% if form.stock.errors %}is-invalid{% endif %}">
+
+                {% if form.stock.errors %}
+                <div class="invalid-feedback">
+                    {{ form.stock.errors.0 }}
+                </div>
+                {% endif %}
             </div>
 
+            <!-- BOTONES -->
             <div class="d-flex flex-column flex-md-row gap-2 mt-3">
                 <button type="submit" class="btn btn-dark">
                     Guardar producto
