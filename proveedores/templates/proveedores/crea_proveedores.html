@@ -15,14 +15,6 @@ Nuevo Proveedor | Distribuidora GABT
             {% csrf_token %}
 
             <div class="mb-3">
-                <label class="form-label">
-                    Número de proveedor
-                    <span class="text-muted">(ingresa: {{ numero_actual }})</span>
-                </label>
-                {{ form.numero_proveedor }}
-            </div>
-
-            <div class="mb-3">
                 <label class="form-label">Negocio</label>
                 {{ form.negocio }}
             </div>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from proveedores.models import Proveedores
 from proveedores.forms import *
 from django.core.paginator import Paginator
+from django.db.models import Max
 
 # Create your views here.
 
@@ -34,13 +35,19 @@ def visualizar_proveedores(request, numero_proveedor):
     })
 
 def crear_proveedores(request):
-    numero_actual = Proveedores.objects.count() + 1
+    ultimo_numero = Proveedores.objects.aggregate(
+        Max('numero_proveedor')
+    )['numero_proveedor__max']
+
+    numero_actual = (ultimo_numero or 0) + 1
 
     if request.method == "POST":
         form = ProveedoresForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            proveedor = form.save(commit=False)
+            proveedor.numero_proveedor = numero_actual
+            proveedor.save()
             return redirect("proveedores:listar_proveedores")
 
     else:

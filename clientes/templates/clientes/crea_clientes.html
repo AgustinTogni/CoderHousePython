@@ -15,14 +15,6 @@ Nuevo Cliente | Distribuidora GABT
             {% csrf_token %}
 
             <div class="mb-3">
-                <label class="form-label">
-                    Número de negocio
-                    <span class="text-muted">(ingresar: {{ numero_actual }})</span>
-                </label>
-                {{ form.numero_negocio }}
-            </div>
-
-            <div class="mb-3">
                 <label class="form-label">Negocio</label>
                 {{ form.negocio }}
             </div>

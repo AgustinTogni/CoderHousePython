@@ -5,7 +5,6 @@ class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = [
-            "numero_negocio",
             "negocio",
             "nombre",
             "apellido",
@@ -15,7 +14,6 @@ class ClientesForm(forms.ModelForm):
         ]
 
         widgets = {
-            "numero_negocio": forms.NumberInput(attrs={"class": "form-control"}),
             "negocio": forms.TextInput(attrs={"class": "form-control"}),
             "nombre": forms.TextInput(attrs={"class": "form-control"}),
             "apellido": forms.TextInput(attrs={"class": "form-control"}),

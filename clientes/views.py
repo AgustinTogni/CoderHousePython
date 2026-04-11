@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from clientes.models import Clientes
 from clientes.forms import *
 from django.core.paginator import Paginator
+from django.db.models import Max
 
 # Create your views here.
 
@@ -34,13 +35,19 @@ def visualizar_clientes(request, dni):
     })
 
 def crear_clientes(request):
-    numero_actual = Clientes.objects.count() + 1
+    ultimo_numero = Clientes.objects.aggregate(
+        Max('numero_negocio')
+    )['numero_negocio__max']
+
+    numero_actual = (ultimo_numero or 0) + 1
 
     if request.method == "POST":
         form = ClientesForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            cliente = form.save(commit=False)
+            cliente.numero_negocio = numero_actual
+            cliente.save()
             return redirect("clientes:listar_clientes")
 
     else:
