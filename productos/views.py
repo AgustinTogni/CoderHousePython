@@ -9,6 +9,7 @@ class ProductosListView(ListView):
     model = Productos
     template_name = "productos/lista_productos.html"
     context_object_name = "productos"
+    paginate_by = 10
 
     def get_queryset(self):
         productos_q = self.request.GET.get("producto", "")

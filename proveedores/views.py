@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from proveedores.models import Proveedores
 from proveedores.forms import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -8,13 +9,19 @@ def listar_proveedores(request):
     proveedores_q = request.GET.get("negocio", "")
 
     if proveedores_q:
-        proveedores = Proveedores.objects.filter(negocio__icontains=proveedores_q)
+        proveedores_list = Proveedores.objects.filter(negocio__icontains=proveedores_q)
     else:
-        proveedores = Proveedores.objects.all()
+        proveedores_list = Proveedores.objects.all()
+
+    paginator = Paginator(proveedores_list, 10)
+    page_number = request.GET.get("page")
+    proveedores = paginator.get_page(page_number)
 
     context = {
         "proveedores": proveedores,
-        "proveedores_q": proveedores_q
+        "proveedores_q": proveedores_q,
+        "is_paginated": proveedores.has_other_pages(),
+        "page_obj": proveedores,
     }
 
     return render(request, "proveedores/lista_proveedores.html", context)

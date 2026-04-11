@@ -21,16 +21,20 @@ Clientes | Distribuidora GABT
 <!-- BUSCADOR -->
 <div class="d-flex justify-content-md-end mb-4">
     <form method="get" action="{% url 'clientes:listar_clientes' %}" class="w-100 w-md-auto" style="max-width: 360px;">
-        <div class="input-group">
 
+        <div class="input-group">
             <input type="text" name="negocio" class="form-control" placeholder="Buscar cliente..."
                 value="{{ clientes_q }}">
 
             <button class="btn btn-dark" type="submit">
                 Buscar
             </button>
-
         </div>
+
+        <div class="form-text text-muted text-center text-md-end">
+            Buscar por nombre de "Negocio"
+        </div>
+
     </form>
 </div>
 
@@ -72,6 +76,61 @@ Clientes | Distribuidora GABT
 
     </table>
 </div>
+
+<!-- PAGINACIÓN -->
+{% if is_paginated %}
+<nav class="mt-4">
+    <ul class="pagination justify-content-center flex-wrap">
+
+        <!-- Anterior -->
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
+                href="?negocio={{ clientes_q }}&page={{ page_obj.previous_page_number }}">
+                ←
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link text-secondary" style="border: 1px solid #dee2e6;">←</span>
+        </li>
+        {% endif %}
+
+        <!-- Números de páginas -->
+        {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+        <li class="page-item active">
+            <span class="page-link" style="background-color: black; border: 1px solid black; color: white;">
+                {{ num }}
+            </span>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
+                href="?negocio={{ clientes_q }}&page={{ num }}">
+                {{ num }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Siguiente -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
+                href="?negocio={{ clientes_q }}&page={{ page_obj.next_page_number }}">
+                →
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link text-secondary" style="border: 1px solid #dee2e6;">→</span>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+{% endif %}
 
 {% else %}
 

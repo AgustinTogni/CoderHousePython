@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from clientes.models import Clientes
 from clientes.forms import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -8,13 +9,19 @@ def listar_clientes(request):
     clientes_q = request.GET.get("negocio", "")
 
     if clientes_q:
-        clientes = Clientes.objects.filter(negocio__icontains=clientes_q)
+        clientes_list = Clientes.objects.filter(negocio__icontains=clientes_q)
     else:
-        clientes = Clientes.objects.all()
+        clientes_list = Clientes.objects.all()
+
+    paginator = Paginator(clientes_list, 10)
+    page_number = request.GET.get("page")
+    clientes = paginator.get_page(page_number)
 
     context = {
         "clientes": clientes,
-        "clientes_q": clientes_q
+        "clientes_q": clientes_q,
+        "is_paginated": clientes.has_other_pages(),
+        "page_obj": clientes,
     }
 
     return render(request, "clientes/lista_clientes.html", context)
@@ -48,12 +55,12 @@ def actualizar_clientes(request, dni):
     cliente = get_object_or_404(Clientes, dni=dni)
 
     if request.method == "POST":
-        form = ClienteUpdateForm(request.POST, instance=cliente)
+        form = ClientesUpdateForm(request.POST, instance=cliente)
         if form.is_valid():
             form.save()
             return redirect("clientes:listar_clientes")
     else:
-        form = ClienteUpdateForm(instance=cliente)
+        form = ClientesUpdateForm(instance=cliente)
 
     return render(request, "clientes/actualiza_clientes.html", {
         "form": form,

@@ -22,6 +22,7 @@ Productos | Distribuidora GABT
 <div class="d-flex justify-content-md-end mb-4">
     <form method="get" action="{% url 'productos:listar_productos' %}" class="w-100 w-md-auto"
         style="max-width: 360px;">
+
         <div class="input-group">
 
             <input type="text" name="producto" class="form-control" placeholder="Buscar producto..."
@@ -32,6 +33,11 @@ Productos | Distribuidora GABT
             </button>
 
         </div>
+
+        <div class="form-text text-muted text-center text-md-end">
+            Buscar por nombre de "Producto"
+        </div>
+
     </form>
 </div>
 
@@ -71,6 +77,61 @@ Productos | Distribuidora GABT
 
     </table>
 </div>
+
+<!-- PAGINACIÓN -->
+{% if is_paginated %}
+<nav class="mt-4">
+    <ul class="pagination justify-content-center flex-wrap">
+
+        <!-- Anterior -->
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
+                href="?producto={{ productos_q }}&page={{ page_obj.previous_page_number }}">
+                ←
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link text-secondary" style="border: 1px solid #dee2e6;">←</span>
+        </li>
+        {% endif %}
+
+        <!-- Números de páginas -->
+        {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+        <li class="page-item active">
+            <span class="page-link" style="background-color: black; border: 1px solid black; color: white;">
+                {{ num }}
+            </span>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
+                href="?producto={{ productos_q }}&page={{ num }}">
+                {{ num }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Siguiente -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
+                href="?producto={{ productos_q }}&page={{ page_obj.next_page_number }}">
+                →
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link text-secondary" style="border: 1px solid #dee2e6;">→</span>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+{% endif %}
 
 {% else %}
 

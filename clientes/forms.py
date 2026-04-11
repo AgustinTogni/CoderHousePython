@@ -24,7 +24,7 @@ class ClientesForm(forms.ModelForm):
             "email": forms.EmailInput(attrs={"class": "form-control"})
         }
 
-class ClienteUpdateForm(forms.ModelForm):
+class ClientesUpdateForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = [
