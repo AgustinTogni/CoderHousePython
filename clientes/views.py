@@ -54,8 +54,7 @@ def crear_clientes(request):
         form = ClientesForm()
 
     return render(request, "clientes/crea_clientes.html", {
-        "form": form,
-        "numero_actual": numero_actual
+        "form": form
     })
 
 def actualizar_clientes(request, dni):

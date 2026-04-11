@@ -54,8 +54,7 @@ def crear_proveedores(request):
         form = ProveedoresForm()
 
     return render(request, "proveedores/crea_proveedores.html", {
-        "form": form,
-        "numero_actual": numero_actual
+        "form": form
     })
 
 def actualizar_proveedores(request, numero_proveedor):

@@ -1,7 +1,8 @@
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
-from django.urls import reverse_lazy
 from productos.models import Productos
 from productos.forms import *
+from django.urls import reverse_lazy
+from django.db.models import Max
 
 # Create your views here.
 
@@ -37,10 +38,13 @@ class ProductosCreateView(CreateView):
     template_name = "productos/crea_productos.html"
     success_url = reverse_lazy("productos:listar_productos")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["numero_actual"] = Productos.objects.count() + 1
-        return context
+    def form_valid(self, form):
+        ultimo_numero = Productos.objects.aggregate(
+            Max("numero_producto")
+        )["numero_producto__max"]
+
+        form.instance.numero_producto = (ultimo_numero or 0) + 1
+        return super().form_valid(form)
 
 class ProductosUpdateView(UpdateView):
     model = Productos

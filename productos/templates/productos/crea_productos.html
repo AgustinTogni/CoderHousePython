@@ -17,14 +17,6 @@ Nuevo Producto | Distribuidora GABT
             {% csrf_token %}
 
             <div class="mb-3">
-                <label class="form-label">
-                    Número de producto
-                    <span class="text-muted">(ingresar: {{ numero_actual }})</span>
-                </label>
-                {{ form.numero_producto }}
-            </div>
-
-            <div class="mb-3">
                 <label class="form-label">Nombre</label>
                 {{ form.nombre }}
             </div>
