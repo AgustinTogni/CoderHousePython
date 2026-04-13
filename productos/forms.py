@@ -6,7 +6,8 @@ class ProductosForm(forms.ModelForm):
         model = Productos
         fields = [
             "imagen",
-            "nombre", 
+            "nombre",
+            "marca",
             "precio", 
             "stock"
         ]
@@ -14,6 +15,7 @@ class ProductosForm(forms.ModelForm):
         widgets = {
             "imagen": forms.FileInput(attrs={"class": "form-control"}),
             "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "marca": forms.TextInput(attrs={"class": "form-control"}),
             "precio": forms.NumberInput(attrs={"class": "form-control"}),
             "stock": forms.NumberInput(attrs={"class": "form-control"})
         }
@@ -25,6 +27,10 @@ class ProductosForm(forms.ModelForm):
             "nombre": {
                 "required": "El nombre del producto es obligatorio.",
                 "max_length": "El nombre del producto no puede superar los 100 caracteres.",
+            },
+            "marca": {
+                "required": "La marca es obligatoria.",
+                "max_length": "La marca no puede superar los 40 caracteres.",
             },
             "precio": {
                 "required": "El precio es obligatorio.",
@@ -43,7 +49,8 @@ class ProductosUpdateForm(forms.ModelForm):
         model = Productos
         fields = [
             "imagen",
-            "nombre", 
+            "nombre",
+            "marca",
             "precio", 
             "stock"
         ]
@@ -51,6 +58,7 @@ class ProductosUpdateForm(forms.ModelForm):
         widgets = {
             "imagen": forms.FileInput(attrs={"class": "form-control"}),
             "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "marca": forms.TextInput(attrs={"class": "form-control"}),
             "precio": forms.NumberInput(attrs={"class": "form-control"}),
             "stock": forms.NumberInput(attrs={"class": "form-control"})
         }
@@ -58,7 +66,9 @@ class ProductosUpdateForm(forms.ModelForm):
         error_messages = {
             "nombre": {
                 "required": "El nombre del producto es obligatorio.",
-                "max_length": "El nombre no puede superar los 100 caracteres.",
+            },
+            "marca": {
+                "required": "La marca es obligatoria.",
             },
             "precio": {
                 "required": "El precio es obligatorio.",

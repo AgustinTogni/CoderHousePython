@@ -44,6 +44,20 @@ Nuevo Producto | Distribuidora GABT
                 {% endif %}
             </div>
 
+            <!-- MARCA -->
+            <div class="mb-3">
+                <label class="form-label">Marca</label>
+
+                <input type="text" name="{{ form.marca.name }}" value="{{ form.marca.value|default_if_none:'' }}"
+                    class="form-control {% if form.marca.errors %}is-invalid{% endif %}">
+
+                {% if form.marca.errors %}
+                <div class="invalid-feedback">
+                    {{ form.marca.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
             <!-- PRECIO -->
             <div class="mb-3">
                 <label class="form-label">Precio</label>

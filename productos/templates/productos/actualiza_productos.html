@@ -53,6 +53,19 @@ Editar Producto | Distribuidora GABT
                 {% endif %}
             </div>
 
+            <!-- MARCA -->
+            <div class="mb-3">
+                <label class="form-label">Marca</label>
+
+                {{ form.marca }}
+
+                {% if form.marca.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.marca.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
             <!-- PRECIO -->
             <div class="mb-3">
                 <label class="form-label">Precio</label>

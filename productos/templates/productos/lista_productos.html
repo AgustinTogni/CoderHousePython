@@ -50,6 +50,7 @@ Productos | Distribuidora GABT
             <tr>
                 <th style="width: 80px;"></th>
                 <th>Producto</th>
+                <th class="d-none d-md-table-cell">Marca</th>
                 <th class="d-none d-md-table-cell">Precio</th>
                 <th class="d-none d-md-table-cell">Stock</th>
                 <th class="text-center">Acciones</th>
@@ -76,8 +77,13 @@ Productos | Distribuidora GABT
                     {{ producto.nombre }}
 
                     <div class="small text-muted d-md-none">
-                        ${{ producto.precio }} · Stock: {{ producto.stock }}
+                        {{ producto.marca }} · ${{ producto.precio }} · Stock: {{ producto.stock }}
                     </div>
+                </td>
+
+                <!-- MARCA (desktop) -->
+                <td class="d-none d-md-table-cell">
+                    {{ producto.marca }}
                 </td>
 
                 <!-- PRECIO (desktop) -->
