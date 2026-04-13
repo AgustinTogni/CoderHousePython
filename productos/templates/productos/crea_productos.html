@@ -20,7 +20,7 @@ Nuevo Producto | Distribuidora GABT
             <div class="mb-3">
                 <label class="form-label">Imagen</label>
 
-                <input type="file" name="{{ form.imagen.name }}"
+                <input type="file" name="{{ form.imagen.name }}" accept="image/*"
                     class="form-control {% if form.imagen.errors %}is-invalid{% endif %}">
 
                 {% if form.imagen.errors %}

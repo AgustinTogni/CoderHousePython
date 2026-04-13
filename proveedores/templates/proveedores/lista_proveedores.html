@@ -49,10 +49,10 @@ Proveedores | Distribuidora GABT
         <thead class="table-dark">
             <tr>
                 <th>Negocio</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Teléfono</th>
-                <th>Email</th>
+                <th class="d-none d-md-table-cell">Nombre</th>
+                <th class="d-none d-md-table-cell">Apellido</th>
+                <th class="d-none d-md-table-cell">Teléfono</th>
+                <th class="d-none d-md-table-cell">Email</th>
                 <th class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -60,17 +60,43 @@ Proveedores | Distribuidora GABT
         <tbody>
             {% for proveedor in proveedores %}
             <tr>
-                <td>{{ proveedor.negocio }}</td>
-                <td>{{ proveedor.nombre }}</td>
-                <td>{{ proveedor.apellido }}</td>
-                <td>{{ proveedor.numero_telefonico }}</td>
-                <td>{{ proveedor.email }}</td>
+
+                <!-- NEGOCIO (PRINCIPAL EN MOBILE) -->
+                <td class="fw-semibold">
+                    {{ proveedor.negocio }}
+
+                    <div class="small text-muted d-md-none">
+                        {{ proveedor.nombre }} {{ proveedor.apellido }}<br>
+                        Tel: {{ proveedor.numero_telefonico }}<br>
+                        {{ proveedor.email }}
+                    </div>
+                </td>
+
+                <!-- DESKTOP ONLY -->
+                <td class="d-none d-md-table-cell">
+                    {{ proveedor.nombre }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ proveedor.apellido }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ proveedor.numero_telefonico }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ proveedor.email }}
+                </td>
+
+                <!-- ACCIONES -->
                 <td class="text-center align-middle">
                     <a href="{% url 'proveedores:visualizar_proveedores' proveedor.numero_proveedor %}"
                         class="btn btn-sm btn-outline-primary">
                         Ver
                     </a>
                 </td>
+
             </tr>
             {% endfor %}
         </tbody>
@@ -83,7 +109,6 @@ Proveedores | Distribuidora GABT
 <nav class="mt-4">
     <ul class="pagination justify-content-center flex-wrap">
 
-        <!-- Anterior -->
         {% if page_obj.has_previous %}
         <li class="page-item">
             <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
@@ -97,7 +122,6 @@ Proveedores | Distribuidora GABT
         </li>
         {% endif %}
 
-        <!-- Números -->
         {% for num in page_obj.paginator.page_range %}
         {% if num == page_obj.number %}
         <li class="page-item active">
@@ -115,7 +139,6 @@ Proveedores | Distribuidora GABT
         {% endif %}
         {% endfor %}
 
-        <!-- Siguiente -->
         {% if page_obj.has_next %}
         <li class="page-item">
             <a class="page-link text-dark" style="border: 1px solid #dee2e6;"

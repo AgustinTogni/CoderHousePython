@@ -20,7 +20,8 @@ Clientes | Distribuidora GABT
 
 <!-- BUSCADOR -->
 <div class="d-flex justify-content-md-end mb-4">
-    <form method="get" action="{% url 'clientes:listar_clientes' %}" class="w-100 w-md-auto" style="max-width: 360px;">
+    <form method="get" action="{% url 'clientes:listar_clientes' %}" class="w-100 w-md-auto"
+        style="max-width: 360px;">
 
         <div class="input-group">
             <input type="text" name="negocio" class="form-control" placeholder="Buscar cliente..."
@@ -46,11 +47,11 @@ Clientes | Distribuidora GABT
         <thead class="table-dark">
             <tr>
                 <th>Negocio</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>DNI</th>
-                <th>Teléfono</th>
-                <th>Email</th>
+                <th class="d-none d-md-table-cell">Nombre</th>
+                <th class="d-none d-md-table-cell">Apellido</th>
+                <th class="d-none d-md-table-cell">DNI</th>
+                <th class="d-none d-md-table-cell">Teléfono</th>
+                <th class="d-none d-md-table-cell">Email</th>
                 <th class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -58,18 +59,48 @@ Clientes | Distribuidora GABT
         <tbody>
             {% for cliente in clientes %}
             <tr>
-                <td>{{ cliente.negocio }}</td>
-                <td>{{ cliente.nombre }}</td>
-                <td>{{ cliente.apellido }}</td>
-                <td>{{ cliente.dni }}</td>
-                <td>{{ cliente.numero_telefonico }}</td>
-                <td>{{ cliente.email }}</td>
+
+                <!-- NEGOCIO (PRINCIPAL MOBILE) -->
+                <td class="fw-semibold">
+                    {{ cliente.negocio }}
+
+                    <div class="small text-muted d-md-none">
+                        {{ cliente.nombre }} {{ cliente.apellido }}<br>
+                        DNI: {{ cliente.dni }}<br>
+                        Tel: {{ cliente.numero_telefonico }}<br>
+                        {{ cliente.email }}
+                    </div>
+                </td>
+
+                <!-- DESKTOP ONLY -->
+                <td class="d-none d-md-table-cell">
+                    {{ cliente.nombre }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ cliente.apellido }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ cliente.dni }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ cliente.numero_telefonico }}
+                </td>
+
+                <td class="d-none d-md-table-cell">
+                    {{ cliente.email }}
+                </td>
+
+                <!-- ACCIONES -->
                 <td class="text-center align-middle">
                     <a href="{% url 'clientes:visualizar_clientes' cliente.dni %}"
                         class="btn btn-sm btn-outline-primary">
                         Ver
                     </a>
                 </td>
+
             </tr>
             {% endfor %}
         </tbody>
@@ -82,7 +113,6 @@ Clientes | Distribuidora GABT
 <nav class="mt-4">
     <ul class="pagination justify-content-center flex-wrap">
 
-        <!-- Anterior -->
         {% if page_obj.has_previous %}
         <li class="page-item">
             <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
@@ -96,7 +126,6 @@ Clientes | Distribuidora GABT
         </li>
         {% endif %}
 
-        <!-- Números de páginas -->
         {% for num in page_obj.paginator.page_range %}
         {% if num == page_obj.number %}
         <li class="page-item active">
@@ -114,7 +143,6 @@ Clientes | Distribuidora GABT
         {% endif %}
         {% endfor %}
 
-        <!-- Siguiente -->
         {% if page_obj.has_next %}
         <li class="page-item">
             <a class="page-link text-dark" style="border: 1px solid #dee2e6;"
