@@ -13,8 +13,22 @@ Nuevo Producto | Distribuidora GABT
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <form method="post" novalidate>
+        <form method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
+
+            <!-- IMAGEN -->
+            <div class="mb-3">
+                <label class="form-label">Imagen</label>
+
+                <input type="file" name="{{ form.imagen.name }}"
+                    class="form-control {% if form.imagen.errors %}is-invalid{% endif %}">
+
+                {% if form.imagen.errors %}
+                <div class="invalid-feedback">
+                    {{ form.imagen.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
 
             <!-- NOMBRE -->
             <div class="mb-3">

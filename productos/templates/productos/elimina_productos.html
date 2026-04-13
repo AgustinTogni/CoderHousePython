@@ -13,6 +13,20 @@ Eliminar Producto | Distribuidora GABT
 <div class="card shadow-sm border-danger">
     <div class="card-body">
 
+        <!-- IMAGEN -->
+        <div class="text-center mb-4">
+            {% if producto.imagen %}
+            <div class="d-inline-block border rounded shadow-sm">
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid rounded"
+                    style="max-width: 220px; max-height: 220px; object-fit: cover;">
+            </div>
+            {% else %}
+            <div class="d-inline-block border rounded bg-light shadow-sm" style="width: 220px; height: 220px;">
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- ALERTA -->
         <div class="alert alert-danger text-center">
             <p class="mb-2 fw-semibold">
                 ¿Estás seguro que querés eliminar este producto?
@@ -42,7 +56,7 @@ Eliminar Producto | Distribuidora GABT
 
         </div>
 
-        <form method="post" class="d-flex justify-content-center justify-content-md-start gap-2">
+        <form method="post" class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
             {% csrf_token %}
 
             <button type="submit" class="btn btn-danger">

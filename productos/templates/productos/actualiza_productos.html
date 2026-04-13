@@ -11,8 +11,32 @@ Editar Producto | Distribuidora GABT
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <form method="post" novalidate>
+        <form method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
+
+            <!-- IMAGEN ACTUAL -->
+            {% if producto.imagen %}
+            <div class="mb-4 text-center">
+                <div class="d-inline-block border rounded shadow-sm">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid rounded"
+                        style="max-width: 220px; max-height: 220px; object-fit: cover;">
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- NUEVA IMAGEN -->
+            <div class="mb-3">
+                <label class="form-label">Imagen</label>
+
+                <input type="file" name="{{ form.imagen.name }}"
+                    class="form-control {% if form.imagen.errors %}is-invalid{% endif %}">
+
+                {% if form.imagen.errors %}
+                <div class="invalid-feedback">
+                    {{ form.imagen.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
 
             <!-- NOMBRE -->
             <div class="mb-3">
@@ -58,7 +82,7 @@ Editar Producto | Distribuidora GABT
             </div>
 
             <!-- BOTONES -->
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-2 flex-wrap">
                 <button type="submit" class="btn btn-dark">
                     Guardar cambios
                 </button>

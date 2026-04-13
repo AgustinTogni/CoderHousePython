@@ -11,6 +11,19 @@ Detalle Producto | Distribuidora GABT
 <div class="card shadow-sm">
     <div class="card-body">
 
+        <!-- IMAGEN -->
+        <div class="text-center mb-4">
+            {% if producto.imagen %}
+            <div class="d-inline-block border rounded shadow-sm">
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid rounded"
+                    style="max-width: 220px; max-height: 220px; object-fit: cover;">
+            </div>
+            {% else %}
+            <div class="d-inline-block border rounded bg-light shadow-sm" style="width: 220px; height: 220px;">
+            </div>
+            {% endif %}
+        </div>
+
         <div class="row g-3">
 
             <div class="col-md-6">
