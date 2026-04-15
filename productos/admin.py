@@ -5,7 +5,7 @@ from productos.models import Productos
 
 @admin.register(Productos)
 class ProductosAdmin(admin.ModelAdmin):
-    list_display = ("numero_producto", "nombre", "precio", "stock")
+    list_display = ("imagen", "numero_producto", "nombre", "marca", "precio", "stock", "ultima_actualizacion")
     list_display_links = ("nombre",)
     search_fields = ("nombre",)
     ordering = ("numero_producto",)
