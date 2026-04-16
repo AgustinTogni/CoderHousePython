@@ -3,9 +3,11 @@ from clientes.models import Clientes
 from clientes.forms import *
 from django.core.paginator import Paginator
 from django.db.models import Max
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def listar_clientes(request):
     clientes_q = request.GET.get("negocio", "")
 
@@ -27,6 +29,7 @@ def listar_clientes(request):
 
     return render(request, "clientes/lista_clientes.html", context)
 
+@login_required
 def visualizar_clientes(request, dni):
     cliente = get_object_or_404(Clientes, dni=dni)
 
@@ -34,6 +37,7 @@ def visualizar_clientes(request, dni):
         "cliente": cliente
     })
 
+@login_required
 def crear_clientes(request):
     ultimo_numero = Clientes.objects.aggregate(
         Max('numero_negocio')
@@ -57,6 +61,7 @@ def crear_clientes(request):
         "form": form
     })
 
+@login_required
 def actualizar_clientes(request, dni):
     cliente = get_object_or_404(Clientes, dni=dni)
 
@@ -73,6 +78,7 @@ def actualizar_clientes(request, dni):
         "cliente": cliente
     })
 
+@login_required
 def eliminar_clientes(request, dni):
     cliente = get_object_or_404(Clientes, dni=dni)
 

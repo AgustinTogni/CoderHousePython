@@ -3,10 +3,11 @@ from productos.models import Productos
 from productos.forms import *
 from django.urls import reverse_lazy
 from django.db.models import Max
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class ProductosListView(ListView):
+class ProductosListView(LoginRequiredMixin, ListView):
     model = Productos
     template_name = "productos/lista_productos.html"
     context_object_name = "productos"
@@ -24,7 +25,7 @@ class ProductosListView(ListView):
         context["productos_q"] = self.request.GET.get("producto", "")
         return context
 
-class ProductosDetailView(DetailView):
+class ProductosDetailView(LoginRequiredMixin, DetailView):
     model = Productos
     template_name = "productos/visualiza_productos.html"
     context_object_name = "producto"
@@ -32,7 +33,7 @@ class ProductosDetailView(DetailView):
     slug_field = "numero_producto"
     slug_url_kwarg = "numero_producto"
 
-class ProductosCreateView(CreateView):
+class ProductosCreateView(LoginRequiredMixin, CreateView):
     model = Productos
     form_class = ProductosForm
     template_name = "productos/crea_productos.html"
@@ -46,7 +47,7 @@ class ProductosCreateView(CreateView):
         form.instance.numero_producto = (ultimo_numero or 0) + 1
         return super().form_valid(form)
 
-class ProductosUpdateView(UpdateView):
+class ProductosUpdateView(LoginRequiredMixin, UpdateView):
     model = Productos
     form_class = ProductosUpdateForm
     template_name = "productos/actualiza_productos.html"
@@ -56,7 +57,7 @@ class ProductosUpdateView(UpdateView):
     slug_field = "numero_producto"
     slug_url_kwarg = "numero_producto"
 
-class ProductosDeleteView(DeleteView):
+class ProductosDeleteView(LoginRequiredMixin, DeleteView):
     model = Productos
     template_name = "productos/elimina_productos.html"
     context_object_name = "producto"

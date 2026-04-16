@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Registro | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">
+    Crear Cuenta
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <!-- USERNAME -->
+            <div class="mb-3">
+                <label class="form-label">Usuario</label>
+
+                <input type="text" name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}"
+                    class="form-control {% if form.username.errors %}is-invalid{% endif %}">
+
+                {% if form.username.errors %}
+                <div class="invalid-feedback">
+                    {{ form.username.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- NOMBRE -->
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+
+                <input type="text" name="{{ form.first_name.name }}"
+                    value="{{ form.first_name.value|default_if_none:'' }}"
+                    class="form-control {% if form.first_name.errors %}is-invalid{% endif %}">
+
+                {% if form.first_name.errors %}
+                <div class="invalid-feedback">
+                    {{ form.first_name.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- APELLIDO -->
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+
+                <input type="text" name="{{ form.last_name.name }}"
+                    value="{{ form.last_name.value|default_if_none:'' }}"
+                    class="form-control {% if form.last_name.errors %}is-invalid{% endif %}">
+
+                {% if form.last_name.errors %}
+                <div class="invalid-feedback">
+                    {{ form.last_name.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- DNI -->
+            <div class="mb-3">
+                <label class="form-label">DNI</label>
+
+                <input type="text" name="{{ form.dni.name }}" value="{{ form.dni.value|default_if_none:'' }}"
+                    class="form-control {% if form.dni.errors %}is-invalid{% endif %}">
+
+                {% if form.dni.errors %}
+                <div class="invalid-feedback">
+                    {{ form.dni.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+
+                <input type="email" name="{{ form.email.name }}" value="{{ form.email.value|default_if_none:'' }}"
+                    class="form-control {% if form.email.errors %}is-invalid{% endif %}">
+
+                {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {{ form.email.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- TELEFONO -->
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+
+                <input type="text" name="{{ form.numero_telefonico.name }}"
+                    value="{{ form.numero_telefonico.value|default_if_none:'' }}"
+                    class="form-control {% if form.numero_telefonico.errors %}is-invalid{% endif %}">
+
+                {% if form.numero_telefonico.errors %}
+                <div class="invalid-feedback">
+                    {{ form.numero_telefonico.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- AVATAR -->
+            <div class="mb-3">
+                <label class="form-label">Avatar</label>
+
+                <input type="file" name="{{ form.avatar.name }}"
+                    class="form-control {% if form.avatar.errors %}is-invalid{% endif %}">
+
+                {% if form.avatar.errors %}
+                <div class="invalid-feedback">
+                    {{ form.avatar.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+
+                <input type="password" name="{{ form.password1.name }}"
+                    class="form-control {% if form.password1.errors %}is-invalid{% endif %}">
+
+                {% if form.password1.errors %}
+                <div class="invalid-feedback">
+                    {{ form.password1.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+            <div class="mb-4">
+                <label class="form-label">Confirmar contraseña</label>
+
+                <input type="password" name="{{ form.password2.name }}"
+                    class="form-control {% if form.password2.errors %}is-invalid{% endif %}">
+
+                {% if form.password2.errors %}
+                <div class="invalid-feedback">
+                    {{ form.password2.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- ERROR GENERAL -->
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger text-center">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <hr class="my-4">
+
+            <!-- BOTONES -->
+            <div class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
+
+                <button type="submit" class="btn btn-dark">
+                    Registrarse
+                </button>
+
+                <a href="{% url 'cuentas:login' %}" class="btn btn-secondary">
+                    Volver
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

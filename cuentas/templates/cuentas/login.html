@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Login | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">
+    Iniciar Sesión
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <!-- MENSAJES DE ERROR -->
+        {% if form.errors %}
+        <div class="alert alert-danger text-center">
+            Usuario o contraseña incorrectos
+        </div>
+        {% endif %}
+
+        <!-- FORM -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- USERNAME -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Usuario
+                </label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">
+                    Contraseña
+                </label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- BOTONES -->
+            <div class="d-flex justify-content-center justify-content-md-start">
+
+                <button type="submit" class="btn btn-dark">
+                    Ingresar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

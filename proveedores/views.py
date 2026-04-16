@@ -3,9 +3,11 @@ from proveedores.models import Proveedores
 from proveedores.forms import *
 from django.core.paginator import Paginator
 from django.db.models import Max
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def listar_proveedores(request):
     proveedores_q = request.GET.get("negocio", "")
 
@@ -27,6 +29,7 @@ def listar_proveedores(request):
 
     return render(request, "proveedores/lista_proveedores.html", context)
 
+@login_required
 def visualizar_proveedores(request, numero_proveedor):
     proveedor = get_object_or_404(Proveedores, numero_proveedor=numero_proveedor)
 
@@ -34,6 +37,7 @@ def visualizar_proveedores(request, numero_proveedor):
         "proveedor": proveedor
     })
 
+@login_required
 def crear_proveedores(request):
     ultimo_numero = Proveedores.objects.aggregate(
         Max('numero_proveedor')
@@ -57,6 +61,7 @@ def crear_proveedores(request):
         "form": form
     })
 
+@login_required
 def actualizar_proveedores(request, numero_proveedor):
     proveedor = get_object_or_404(Proveedores, numero_proveedor=numero_proveedor)
 
@@ -73,6 +78,7 @@ def actualizar_proveedores(request, numero_proveedor):
         "proveedor": proveedor
     })
 
+@login_required
 def eliminar_proveedores(request, numero_proveedor):
     proveedor = get_object_or_404(Proveedores, numero_proveedor=numero_proveedor)
 
