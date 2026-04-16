@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Mi Perfil | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">
+    Mi Perfil
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <!-- AVATAR -->
+        <div class="text-center mb-4">
+            {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Avatar" class="rounded-circle shadow-sm" width="120" height="120"
+                style="object-fit: cover;">
+            {% else %}
+            <img src="/media/default/default.png" alt="Avatar" class="rounded-circle shadow-sm" width="120" height="120"
+                style="object-fit: cover;">
+            {% endif %}
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Número de usuario</small>
+                    <div class="fw-semibold fs-5">{{ user.numero_usuario }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">DNI</small>
+                    <div class="fw-semibold fs-5">{{ user.dni }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Usuario</small>
+                    <div class="fw-semibold fs-5">{{ user.username }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Teléfono</small>
+                    <div class="fw-semibold fs-5">{{ user.numero_telefonico }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Nombre</small>
+                    <div class="fw-semibold fs-5">{{ user.first_name }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Apellido</small>
+                    <div class="fw-semibold fs-5">{{ user.last_name }}</div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="p-3 border rounded">
+                    <small class="text-muted">Email</small>
+                    <div class="fw-semibold fs-5">{{ user.email }}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
+
+            <a href="{% url 'productos:listar_productos' %}" class="btn btn-secondary">
+                Volver
+            </a>
+
+            <a href="{% url 'cuentas:perfil_change' %}" class="btn btn-dark">
+                Actualizar
+            </a>
+
+            <form method="POST" action="{% url 'cuentas:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    Cerrar sesión
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

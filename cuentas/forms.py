@@ -71,6 +71,18 @@ class PerfilesCreateForm(UserCreationForm):
 class PerfilesChangeForm(UserChangeForm):
     password = None
 
+    password1 = forms.CharField(
+        label="Nueva contraseña",
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        required=False
+    )
+
+    password2 = forms.CharField(
+        label="Confirmar contraseña",
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        required=False
+    )
+
     class Meta:
         model = Perfiles
         fields = [
@@ -90,4 +102,28 @@ class PerfilesChangeForm(UserChangeForm):
             "email": forms.EmailInput(attrs={"class": "form-control"}),
             "dni": forms.TextInput(attrs={"class": "form-control"}),
             "numero_telefonico": forms.TextInput(attrs={"class": "form-control"}),
+            "avatar": forms.FileInput(attrs={"class": "form-control"}),
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 or password2:
+            if password1 != password2:
+                raise forms.ValidationError("Las contraseñas no coinciden.")
+
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password1 = self.cleaned_data.get("password1")
+
+        if password1:
+            user.set_password(password1)
+
+        if commit:
+            user.save()
+
+        return user

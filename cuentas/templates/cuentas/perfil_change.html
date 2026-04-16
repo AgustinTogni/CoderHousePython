@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Editar Perfil | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">
+    Editar Perfil
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <!-- AVATAR ACTUAL -->
+            <div class="text-center mb-4">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="Avatar" class="rounded-circle shadow-sm" width="120" height="120"
+                    style="object-fit: cover;">
+                {% else %}
+                <img src="/media/default/default.png" alt="Avatar" class="rounded-circle shadow-sm" width="120"
+                    height="120" style="object-fit: cover;">
+                {% endif %}
+            </div>
+
+            <!-- INPUT AVATAR -->
+            <div class="mb-3">
+                <label class="form-label">Avatar</label>
+
+                <input type="file" name="{{ form.avatar.name }}" accept="image/*"
+                    class="form-control {% if form.avatar.errors %}is-invalid{% endif %}">
+
+                {% if form.avatar.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.avatar.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- USERNAME -->
+            <div class="mb-3">
+                <label class="form-label">Usuario</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.username.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- NOMBRE -->
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.first_name.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- APELLIDO -->
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.last_name.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- DNI -->
+            <div class="mb-3">
+                <label class="form-label">DNI</label>
+                {{ form.dni }}
+                {% if form.dni.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.dni.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.email.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- TELÉFONO -->
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                {{ form.numero_telefonico }}
+                {% if form.numero_telefonico.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.numero_telefonico.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- CONTRASEÑA -->
+            <h5 class="fw-semibold mb-3">Cambiar contraseña (opcional)</h5>
+
+            <!-- PASSWORD 1 -->
+            <div class="mb-3">
+                <label class="form-label">Nueva contraseña</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.password1.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- PASSWORD 2 -->
+            <div class="mb-3">
+                <label class="form-label">Confirmar contraseña</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.password2.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <hr class="my-4">
+
+            <!-- BOTONES -->
+            <div class="d-flex justify-content-center justify-content-md-start gap-2 flex-wrap">
+
+                <button type="submit" class="btn btn-dark">
+                    Guardar cambios
+                </button>
+
+                <a href="{% url 'cuentas:perfil_detail' %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

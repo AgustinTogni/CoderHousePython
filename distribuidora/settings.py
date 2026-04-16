@@ -126,4 +126,4 @@ AUTH_USER_MODEL = "cuentas.Perfiles"
 
 LOGIN_URL = "cuentas:login"
 LOGIN_REDIRECT_URL = "productos:listar_productos"
-LOGOUT_REDIRECT_URL = "cuentas:login"
+LOGOUT_REDIRECT_URL = "cuentas:logout"

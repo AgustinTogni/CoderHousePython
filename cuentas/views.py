@@ -3,6 +3,7 @@ from cuentas.forms import *
 from django.db.models import Max
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -39,7 +40,8 @@ def profile_change(request):
     if request.method == "POST":
         form = PerfilesChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            update_session_auth_hash(request, user)
             return redirect("cuentas:perfil_detail")
     else:
         form = PerfilesChangeForm(instance=request.user)
