@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from cuentas.models import Perfiles
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 class PerfilesCreateForm(UserCreationForm):
     class Meta:
@@ -74,13 +76,13 @@ class PerfilesChangeForm(UserChangeForm):
     password1 = forms.CharField(
         label="Nueva contraseña",
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
-        required=False
+        required=False,
     )
 
     password2 = forms.CharField(
         label="Confirmar contraseña",
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
-        required=False
+        required=False,
     )
 
     class Meta:
@@ -99,10 +101,37 @@ class PerfilesChangeForm(UserChangeForm):
             "username": forms.TextInput(attrs={"class": "form-control"}),
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
             "last_name": forms.TextInput(attrs={"class": "form-control"}),
-            "email": forms.EmailInput(attrs={"class": "form-control"}),
             "dni": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
             "numero_telefonico": forms.TextInput(attrs={"class": "form-control"}),
             "avatar": forms.FileInput(attrs={"class": "form-control"}),
+        }
+
+        error_messages = {
+            "username": {
+                "required": "El nombre de usuario es obligatorio.",
+                "unique": "Este nombre de usuario ya está en uso.",
+                "max_length": "El nombre de usuario es demasiado largo.",
+            },
+            "first_name": {
+                "max_length": "El nombre es demasiado largo.",
+            },
+            "last_name": {
+                "max_length": "El apellido es demasiado largo.",
+            },
+            "dni": {
+                "required": "El DNI es obligatorio.",
+                "max_length": "El DNI no puede superar los 8 caracteres.",
+                "unique": "Este DNI ya está registrado.",
+            },
+            "email": {
+                "invalid": "Ingresá un email válido (ej: usuario@correo.com).",
+            },
+            "numero_telefonico": {
+                "required": "El número telefónico es obligatorio.",
+                "max_length": "El número telefónico no puede tener más de 10 caracteres.",
+                "unique": "Este número ya está registrado.",
+            }
         }
 
     def clean(self):
@@ -113,6 +142,12 @@ class PerfilesChangeForm(UserChangeForm):
         if password1 or password2:
             if password1 != password2:
                 raise forms.ValidationError("Las contraseñas no coinciden.")
+
+            if password1:
+                try:
+                    validate_password(password1, self.instance)
+                except ValidationError as e:
+                    self.add_error("password1", e)
 
         return cleaned_data
 
