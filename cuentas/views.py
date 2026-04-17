@@ -32,18 +32,18 @@ def register(request):
     })
 
 @login_required
-def profile_detail(request):
-    return render(request, "cuentas/perfil_detail.html", {"user": request.user})
+def visualiza_cuentas(request):
+    return render(request, "cuentas/visualiza_cuentas.html", {"user": request.user})
 
 @login_required
-def profile_change(request):
+def actualiza_cuentas(request):
     if request.method == "POST":
         form = PerfilesChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return redirect("cuentas:perfil_detail")
+            return redirect("cuentas:visualiza_cuentas")
     else:
         form = PerfilesChangeForm(instance=request.user)
     
-    return render(request, "cuentas/perfil_change.html", {"form": form})
+    return render(request, "cuentas/actualiza_cuentas.html", {"form": form})

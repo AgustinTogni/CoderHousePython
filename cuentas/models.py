@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-import uuid
 
 # Create your models here.
-
-def get_code():
-    return uuid.uuid4().hex
 
 def avatar_upload_to(instance, filename):
     return f"avatars/{instance.username}/{filename}"
