@@ -5,6 +5,23 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
 class PerfilesCreateForm(UserCreationForm):
+
+    password1 = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        error_messages={
+            "required": "La contraseña es obligatoria.",
+        },
+    )
+
+    password2 = forms.CharField(
+        label="Confirmar contraseña",
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        error_messages={
+            "required": "Debés confirmar la contraseña.",
+        },
+    )
+
     class Meta:
         model = Perfiles
         fields = [
@@ -54,21 +71,23 @@ class PerfilesCreateForm(UserCreationForm):
             }
         }
 
-        password1 = forms.CharField(
-            label="Contraseña",
-            widget=forms.PasswordInput(attrs={"class": "form-control"}),
-            error_messages={
-                "required": "La contraseña es obligatoria.",
-            },
-        )
+    def clean(self):
+        cleaned_data = super().clean()
 
-        password2 = forms.CharField(
-            label="Confirmar contraseña",
-            widget=forms.PasswordInput(attrs={"class": "form-control"}),
-            error_messages={
-                "required": "Debés confirmar la contraseña.",
-            },
-        )
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 or password2:
+            if password1 != password2:
+                raise forms.ValidationError("Las contraseñas no coinciden.")
+
+            if password1:
+                try:
+                    validate_password(password1, self.instance)
+                except ValidationError as e:
+                    self.add_error("password1", e)
+
+        return cleaned_data
 
 class PerfilesChangeForm(UserChangeForm):
     password = None
@@ -136,6 +155,7 @@ class PerfilesChangeForm(UserChangeForm):
 
     def clean(self):
         cleaned_data = super().clean()
+
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 
