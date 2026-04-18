@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.views.static import serve
+from django.shortcuts import render
+
+def sobre_mi(request):
+    return render(request, "sobre_mi.html")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +29,7 @@ urlpatterns = [
     path('clientes/', include("clientes.urls")),
     path('proveedores/', include("proveedores.urls")),
     path('cuentas/', include("cuentas.urls")),
+    path('sobre_mi/', sobre_mi, name='sobre_mi'),
 ]
 
 urlpatterns += [

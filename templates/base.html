@@ -98,11 +98,18 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <div class="container-lg">
+    <footer class="bg-dark text-white py-3 mt-auto">
+        <div
+            class="container-lg d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
 
-            <small class="d-block">
+            <small class="mb-2 mb-md-0">
                 © 2026 - Distribuidora GABT
+            </small>
+
+            <small>
+                <a href="{% url 'sobre_mi' %}" class="text-white text-decoration-none">
+                    Desarrollado por <span class="text-decoration-underline">Agustin Togni</span>
+                </a>
             </small>
 
         </div>

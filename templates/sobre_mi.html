@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+Agustin Togni | Distribuidora GABT
+{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mb-4 fw-bold text-center text-md-start">
+    Sobre mí
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div class="row align-items-center g-4">
+
+            <!-- FOTO -->
+            <div class="col-12 col-md-4 text-center">
+                <div class="mx-auto rounded-circle overflow-hidden shadow-sm border border-2"
+                    style="width: 220px; height: 220px;">
+
+                    <img src="{% static 'img/agustin.jpg' %}" alt="Agustín" class="w-100 h-100"
+                        style="object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- INFO -->
+            <div class="col-12 col-md-8">
+                <div class="p-3 border rounded text-center text-md-start">
+                    <h4 class="fw-semibold mb-2">
+                        Agustín Gonzalo Togni Balassi
+                    </h4>
+                    <p class="mb-3 text-muted">
+                        Quality Engineer, apasionado por la calidad de software, la programación
+                        y la mejora continua.
+                    </p>
+
+                    <p class="mb-0 text-muted">
+                        Me considero una persona responsable y comprometida, atenta a los detalles y con aptitudes tanto
+                        para el trabajo en equipo como en solitario. Siempre intento superarme, por lo que me encuentro
+                        en constante capacitación, dispuesto a encontrar nuevos conocimientos y desafíos.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- REDES -->
+        <div class="row mt-1 g-3">
+
+            <!-- LINKEDIN -->
+            <div class="col-12 col-md-4">
+                <a href="https://www.linkedin.com/in/agustin-gonzalo-togni-balassi-203444243/" target="_blank"
+                    class="text-decoration-none text-dark">
+                    <div class="p-3 border rounded h-100 text-center text-md-start">
+                        <h6 class="fw-semibold mb-1">LinkedIn</h6>
+                        <small class="text-muted">Perfil profesional</small>
+                    </div>
+                </a>
+            </div>
+
+            <!-- GITLAB -->
+            <div class="col-12 col-md-4">
+                <a href="https://gitlab.com/users/AgustinTogni/projects" target="_blank"
+                    class="text-decoration-none text-dark">
+                    <div class="p-3 border rounded h-100 text-center text-md-start">
+                        <h6 class="fw-semibold mb-1">GitLab</h6>
+                        <small class="text-muted">Proyectos personales</small>
+                    </div>
+                </a>
+            </div>
+
+            <!-- GITHUB -->
+            <div class="col-12 col-md-4">
+                <a href="https://github.com/AgustinTogni" target="_blank" class="text-decoration-none text-dark">
+                    <div class="p-3 border rounded h-100 text-center text-md-start">
+                        <h6 class="fw-semibold mb-1">GitHub</h6>
+                        <small class="text-muted">Proyectos personales</small>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <!-- BOTÓN -->
+        <div class="d-flex justify-content-center justify-content-md-start">
+            <a href="{% url 'productos:listar_productos' %}" class="btn btn-secondary">
+                Volver
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
