@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block titulo %}
 Mi Perfil | Distribuidora GABT
@@ -19,8 +20,8 @@ Mi Perfil | Distribuidora GABT
             <img src="{{ user.avatar.url }}" alt="Avatar" class="rounded-circle shadow-sm" width="120" height="120"
                 style="object-fit: cover;">
             {% else %}
-            <img src="/media/default/default.png" alt="Avatar" class="rounded-circle shadow-sm" width="120" height="120"
-                style="object-fit: cover;">
+            <img src="{% static 'img/default.png' %}" alt="Avatar" class="rounded-circle shadow-sm" width="120"
+                height="120" style="object-fit: cover;">
             {% endif %}
         </div>
 

@@ -12,7 +12,6 @@ class Perfiles(AbstractUser):
     numero_telefonico = models.CharField(max_length=10, unique=True)
     avatar = models.ImageField(
         upload_to=avatar_upload_to,
-        default="default/default.png",
         blank=True,
         null=True,
         verbose_name="Avatar"
