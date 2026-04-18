@@ -1,11 +1,11 @@
 # CoderHousePython
 
-## 🔋Terminado🔋
+### 🔋Terminado🔋
 Este proyecto se encuentra finalizado, sin embargo, puede sufrir algunas modificaciones posteriores, ya sea por errores encontrados, optimización, cambios de versión, entre otros.
 
 Estoy abierto a recibir cualquier tipo de sugerencia, corrección o consejo de quien quiera darlo. A su vez, no tengo problema en responder dudas o preguntas sobre el proyecto, puedes hacérmelas a través de cualquiera de los medios que tengo disponible en mi perfil.
 
-# 📰Descripcion📰
+### 📰Descripcion📰
 Aplicación web desarrollada con **Python** y **Django** orientada a la gestión de una distribuidora, permitiendo administrar las principales entidades del negocio de forma centralizada.
 
 La aplicación está organizada en distintos módulos que cubren las operaciones clave:
